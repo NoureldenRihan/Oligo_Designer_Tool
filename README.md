@@ -76,7 +76,7 @@ Misprime Detection Rules
 The script returns Pandas DataFrames and optionally saves them as CSV files:
 1. Oligos File: Contains names, fragment allocation, positions, full sequences, and Tm/GC data. Includes Boolean flag columns (e.g., flag_homopolymer, flag_misprime) for easy filtering.
 2. Junctions File: Generated for multi-fragment projects. Details shared sequences and provides stitching primers.
-🤝 Contributing
+## 🤝 Contributing
 Contributions, issues, and feature requests are welcome!
 1. Fork the Project
 2. Create your Feature Branch (git checkout -b feature/AmazingFeature)
