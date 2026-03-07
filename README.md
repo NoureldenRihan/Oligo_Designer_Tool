@@ -19,14 +19,20 @@ Designing oligos for PCA requires careful thermodynamic balancing to prevent the
 * Inter-Fragment Junction Design: For genes too long for a single reaction, the tool automatically designs overlapping junctions (default 25 bp) between adjacent fragments. This ensures the independently assembled fragments can be successfully joined in a downstream stitching PCR.
 
 ## ⚙️ Installation & Dependencies
-
 The script relies on standard scientific Python libraries. Install them via pip:
 
 ```bash
 pip install primer3-py biopython pandas
-🚀 Usage
+```
+
+---
+
+## 🚀 Usage
 You can use the tool out-of-the-box with established default parameters derived from PCA literature, or fully customize the constraints for your specific reaction conditions.
-Basic Example
+
+### Basic Example
+
+```python
 from pca_oligo_designer import design_pca_oligos
 
 # Generate oligos and save to CSV
@@ -34,9 +40,12 @@ df, junction_df = design_pca_oligos(
     sequence="ATGACCATGATTACGCCAAGCTATTTTAGCGAA...",
     output_csv="my_oligos.csv"
 )
+```
+### Advanced Customization
 
-Advanced Customization
 For complete control over thermodynamic limits, lengths, and salt concentrations:
+
+```python
 df, junction_df = design_pca_oligos(
     sequence="ATGC...",
     fragment_length_range=(400, 500),
@@ -59,27 +68,58 @@ df, junction_df = design_pca_oligos(
     dna_conc=250.0,
     output_csv="custom_oligos.csv"
 )
-‏##🎛️ Detailed Configuration Reference
-Structural Parameters
-• fragment_length_range: (min, max) length of each independent PCA fragment. Default is (400, 500). Set to None to treat the whole sequence as one fragment.
-• oligo_length_range: (min, max) length of each oligo. Default is (40, 60). The algorithm prioritizes shorter oligos first.
-• overlap_length_range: (min, max) length of the hybridization overlap. Default is (15, 25).
-Quality Thresholds
-• overlap_tm_range: Target melting temperature range. Default is (55.0, 65.0).
-• overlap_gc_range: Acceptable GC percentage for overlaps. Default is (40.0, 70.0).
-• hairpin_dg_threshold: The ΔG cutoff (in kcal/mol) for intramolecular hairpins. Default is -4.0 (flags strong hairpins).
-Misprime Detection Rules
-• misprime_length: Probe length from the 3' end used for scanning. Default is 18.
-• misprime_tip_length: Exact-match required at the absolute 3' tip. Default is 6.
-• misprime_max_mismatches: Tolerance for mismatches in the non-tip region. Default is 4.
-📊 Output Format
-The script returns Pandas DataFrames and optionally saves them as CSV files:
-1. Oligos File: Contains names, fragment allocation, positions, full sequences, and Tm/GC data. Includes Boolean flag columns (e.g., flag_homopolymer, flag_misprime) for easy filtering.
-2. Junctions File: Generated for multi-fragment projects. Details shared sequences and provides stitching primers.
+```
+
+---
+
+## 🎛️ Detailed Configuration Reference
+
+### Structural Parameters
+- **fragment_length_range**: (min, max) length of each independent PCA fragment. Default is **(400, 500)**. Set to `None` to treat the whole sequence as one fragment.
+- **oligo_length_range**: (min, max) length of each oligo. Default is **(40, 60)**. The algorithm prioritizes shorter oligos first.
+- **overlap_length_range**: (min, max) length of the hybridization overlap. Default is **(15, 25)**.
+
+### Quality Thresholds
+- **overlap_tm_range**: Target melting temperature range. Default is **(55.0, 65.0)**.
+- **overlap_gc_range**: Acceptable GC percentage for overlaps. Default is **(40.0, 70.0)**.
+- **hairpin_dg_threshold**: The ΔG cutoff (in kcal/mol) for intramolecular hairpins. Default is **-4.0** (flags strong hairpins).
+
+### Misprime Detection Rules
+- **misprime_length**: Probe length from the 3' end used for scanning. Default is **18**.
+- **misprime_tip_length**: Exact-match required at the absolute 3' tip. Default is **6**.
+- **misprime_max_mismatches**: Tolerance for mismatches in the non-tip region. Default is **4**.
+
+---
+
+## 📊 Output Format
+
+The script returns **Pandas DataFrames** and optionally saves them as CSV files.
+
+**Oligos File**
+- Contains names, fragment allocation, positions, full sequences, and Tm/GC data.
+- Includes Boolean flag columns (e.g., `flag_homopolymer`, `flag_misprime`) for easy filtering.
+
+**Junctions File**
+- Generated for multi-fragment projects.
+- Details shared sequences and provides stitching primers.
+
+---
+
 ## 🤝 Contributing
+
 Contributions, issues, and feature requests are welcome!
-1. Fork the Project
-2. Create your Feature Branch (git checkout -b feature/AmazingFeature)
-3. Commit your Changes (git commit -m 'Add some AmazingFeature')
-4. Push to the Branch (git push origin feature/AmazingFeature)
+
+1. Fork the Project  
+2. Create your Feature Branch  
+   ```bash
+   git checkout -b feature/Feature
+   ```
+3. Commit your Changes  
+   ```bash
+   git commit -m "Add some Feature"
+   ```
+4. Push to the Branch  
+   ```bash
+   git push origin feature/Feature
+   ```
 5. Open a Pull Request
