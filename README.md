@@ -59,7 +59,7 @@ df, junction_df = design_pca_oligos(
     dna_conc=250.0,
     output_csv="custom_oligos.csv"
 )
-🎛️ Detailed Configuration Reference
+‏##🎛️ Detailed Configuration Reference
 Structural Parameters
 • fragment_length_range: (min, max) length of each independent PCA fragment. Default is (400, 500). Set to None to treat the whole sequence as one fragment.
 • oligo_length_range: (min, max) length of each oligo. Default is (40, 60). The algorithm prioritizes shorter oligos first.
